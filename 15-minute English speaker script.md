@@ -34,13 +34,23 @@ This script follows the highlighted 25–40 minute teaching demo in the lesson p
 
 “Move `total = 0` before the loop. That initializes once and preserves the value between iterations.”
 
-## Slide 4 — Introduce the Fibonacci task (5–6 minutes)
+## Slide 4 — Meet the Fibonacci sequence (5–6 minutes, part 1)
+
+“We have used a loop to update a running total. Now let’s look at a different pattern: the Fibonacci sequence starts with 0 and 1. Every later term is the sum of the two terms before it.”
+
+(Point to the triangle.) “For example, 0 plus 1 gives 1. What do you think comes after 0, 1, 1?”
+
+(Invite an answer, then click “Show next triangle”.) “The two neighboring terms are 1 and 1, so the next term is 2. We can repeat the same rule: 1 plus 2 gives 3.”
+
+(Click again to show 1 + 2 = 3.) “A loop can repeat this rule while keeping track of the two current values.”
+
+## Slide 5 — Introduce the Fibonacci task (5–6 minutes, part 2)
 
 “Now we'll transfer the idea of updating state to a different problem. The Fibonacci sequence starts 0, 1, 1, 2, 3, 5: each new term after the first two is the sum of the previous two.
 
 “Your task is to complete this function so it returns the first `n` terms. Start with an empty list and the two state variables shown. You may copy the starter from the slide, or use the starter prepared in your editor. Test the edge cases: `n = 0` must return an empty list, `n = 1` must return `[0]`, and `n = 8` must return the eight terms shown. You will work individually in your Python editor.”
 
-## Slide 5 — Individual coding (6–11 minutes)
+## Slide 6 — Individual coding (6–11 minutes)
 
 “You have five minutes. Implement a loop, run all three tests, and submit through our group's chosen method. Be prepared to explain one update of your state variables.”
 
@@ -48,7 +58,7 @@ This script follows the highlighted 25–40 minute teaching demo in the lesson p
 
 “Please submit what you have now. We will discuss the state update together.”
 
-## Slide 6 — Student explanation and bug (11–13 minutes)
+## Slide 7 — Student explanation and bug (11–13 minutes)
 
 “Could someone explain their solution and walk us through one iteration?”
 
@@ -72,13 +82,13 @@ def fibonacci(n):
     return result
 ```
 
-## Slide 7 — Verified results (13–14 minutes)
+## Slide 8 — Verified results (13–14 minutes)
 
 “The TA will verify the submissions: the solution must use a loop, pass the tests for 0, 1 and 8, and the student must explain a state update.”
 
 (Show the real leaderboard or TA log. Recognize the earliest verified correct submission and give the small reward if available. Do not announce a winner before verification.)
 
-## Slide 8 — Quick check and summary (14–15 minutes)
+## Slide 9 — Quick check and summary (14–15 minutes)
 
 “One final check for everyone: what should `fibonacci(1)` return, and why?”
 
@@ -93,7 +103,7 @@ def fibonacci(n):
 | 0–1 | Poll: `range(1, 5)` |
 | 1–4 | Build and trace the expense loop |
 | 4–5 | Poll: reset inside the loop |
-| 5–6 | Introduce Fibonacci starter and tests |
+| 5–6 | Introduce the Fibonacci triangle, starter and tests |
 | 6–11 | Individual coding; TA prompts and one-minute warning |
 | 11–13 | Student explanation and sequential-update bug |
 | 13–14 | Verify results and recognize the earliest correct submission |
