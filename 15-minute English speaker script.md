@@ -156,4 +156,4 @@ def fibonacci(n):
 | 13–14 min | Check submissions and give the reward |
 | 14–15 min | Check `n = 1` and close |
 
-The vote buttons on the slides record the teacher's clicks on this device. They do not collect live votes from students' phones. The teacher can use a show of hands and click once for each response.
+Students scan the QR code shown on each poll slide and vote on their phones. Each question uses its own Mentimeter presentation and QR link, so the official embedded results open on the correct question without synchronizing two slide decks. Ask students to scan the new QR code for poll 2. Keep participation enabled and the first question selected in each Menti. Before class, verify both links and preview the lesson. Students can also use the “Open voting page” link. Results are supplied by Mentimeter; there are no local vote counters.
