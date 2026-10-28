@@ -1,12 +1,12 @@
 # Teaching demo: Python loops, expenses and Fibonacci
 
-This script follows the highlighted 25–40 minute teaching demo in the lesson plan. Times below are relative to the start of the demo. The five-minute individual coding period is part of the 15 minutes. Prepare the group's editor/submission platform and Mentimeter in advance; use a show of hands, local Python and a TA submission log if needed.
+This script follows the highlighted 25–40 minute teaching demo in the lesson plan. Times below are relative to the start of the demo. The five-minute individual coding period is part of the 15 minutes. Prepare the group's editor/submission platform and the classroom poll on the slides in advance; use a show of hands, local Python and a TA submission log if needed.
 
 ## Slide 1 — Poll 1: range (0–1 minute)
 
-“Let's start with a quick poll. How many times does this loop run? Vote individually: three, four, or five.”
+“Let's start with a quick poll. How many times does this loop run? Vote individually: two, three, four, or five.”
 
-(Open the linked Mentimeter presentation, navigate to the appropriate question, and wait for all four students to vote. If needed, use a show of hands. Invite one to explain. Reveal the answer.)
+(Collect responses by show of hands and click the corresponding option once per student to record the counts on the slide. Invite one to explain, then reveal the answer.)
 
 “`range(1, 5)` gives 1, 2, 3 and 4. The stop value 5 is excluded, so there are four iterations. We'll use that idea of repetition in a problem we've already seen.”
 
@@ -24,7 +24,7 @@ This script follows the highlighted 25–40 minute teaching demo in the lesson p
 
 ## Slide 3 — Poll 2: reset error (4–5 minutes)
 
-“Now look closely at the indentation. What will this version print: 90, 15, or 0? Vote individually.”
+“Now look closely at the indentation. What will this version print: 15, 18, 4, or 5? Vote individually.”
 
 (Collect all four votes and ask a student for the reasoning. Step through the animation, then reveal.)
 
