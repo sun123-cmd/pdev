@@ -6,7 +6,7 @@ This script follows the highlighted 25–40 minute teaching demo in the lesson p
 
 “Let's start with a quick poll. How many times does this loop run? Vote individually: three, four, or five.”
 
-(Wait for all four students to vote. Invite one to explain. Reveal the answer.)
+(Open the linked Mentimeter presentation, navigate to the appropriate question, and wait for all four students to vote. If needed, use a show of hands. Invite one to explain. Reveal the answer.)
 
 “`range(1, 5)` gives 1, 2, 3 and 4. The stop value 5 is excluded, so there are four iterations. We'll use that idea of repetition in a problem we've already seen.”
 
@@ -54,7 +54,7 @@ This script follows the highlighted 25–40 minute teaching demo in the lesson p
 
 “You have five minutes. Implement a loop, run all three tests, and submit through our group's chosen method. Be prepared to explain one update of your state variables.”
 
-(Click “Start timer” on the slide. It displays a one-minute warning and can be paused or reset. The TA circulates. Ask questions rather than providing the solution: “Which value do you append?” “What are the current and next terms?” “How do you preserve the old values?” Give a one-minute warning. Record submissions and verification times; use local Python and a TA log if the platform fails.)
+(Use a separate timer. The TA circulates. Ask questions rather than providing the solution: “Which value do you append?” “What are the current and next terms?” “How do you preserve the old values?” Give a one-minute warning. Record submissions and verification times; use local Python and a TA log if the platform fails.)
 
 “Please submit what you have now. We will discuss the state update together.”
 
