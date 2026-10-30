@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FiboLab · Python Loops</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js" defer></script><script src="lab.js" defer></script>
+</head>
+<body>
+<div class="shell">
+<header class="topbar"><a class="brand" href="../"><span class="logo">F</span><span><b>FiboLab</b><small>Python Loops · class challenge</small></span></a><nav class="nav"><a href="#task">Task</a><a href="#leaderboard">Leaderboard</a><a href="?view=teacher" target="_blank" rel="noopener">Teacher view ↗</a></nav><div class="profile"><span class="avatar" id="avatar">?</span><span class="profile-name" id="profileName">Not registered</span><button class="ghost" id="changeName" hidden>Change student</button></div></header>
+<section class="hero"><div><div class="eyebrow">PYTHON LOOPS / CLASS CHALLENGE</div><h1>Loop it.<br><span style="color:var(--lime)">Test it.</span><br>Explain it.</h1><p>Return the first n Fibonacci terms. Submit your Python code, check the results, and explain one state update to the TA.</p></div><div class="hero-card"><h3>Class progress</h3><div class="big" id="submissionCount">0</div><div class="sub" id="submissionLabel">students submitted</div><p class="sub">Ranked by first fully correct submission. TA confirmation shown separately.</p></div></section>
+<div class="connection" id="connection" role="status">Connecting to the class service…</div>
+<section class="panel entry" id="registration"><form id="registerForm"><label class="field"><span>Display name</span><input id="nameInput" name="name" maxlength="40" required autocomplete="nickname" placeholder="e.g. Alex · 2304"></label><button class="primary" type="submit">Join class</button></form><p class="sub">Use your own name. This browser remembers your registration; no password or invite code is needed.</p></section>
+<section id="task"><div class="section-head"><div><h2>Loop Fibonacci</h2><p>Implement fibonacci(n): return a list of the first n terms, starting with 0, 1.</p></div><span class="status" id="submissionStatus">Not submitted</span></div>
+<div class="workspace"><div class="panel"><div class="panel-head"><div><div class="panel-title">main.py</div><div class="panel-note">Use a loop. No recursion. n=0 → []; n=1 → [0]; n=8 → [0, 1, 1, 2, 3, 5, 8, 13]</div></div><div class="score-box"><div class="score" id="scoreValue">— <small>/ 50</small></div></div></div><div class="editor"><div class="editor-bar"><span class="dot"></span><span>Python 3 · draft saved in this browser</span></div><label for="codeEditor" class="panel-note" hidden>Python code</label><textarea id="codeEditor" aria-label="Python code" spellcheck="false" autocapitalize="off" autocomplete="off">def fibonacci(n):
+    result = []
+    a, b = 0, 1
+    # Add a loop and update the state
+    return result</textarea><div class="editor-foot"><span class="hint">Initialize → repeat → update → test</span><button class="primary" id="submitBtn">Submit and run tests</button></div></div><p class="feedback" id="feedback" role="status">Tests will run after you submit.</p><div class="test-list" id="testList"></div></div><div class="side-stack"><div class="panel" id="rubric"><div class="panel-head"><div><div class="panel-title">Rubric</div><div class="panel-note">Actual Python output checks</div></div></div><div class="rubric"><div class="rubric-row"><span>Correct outputs · n=0, 1, 2, 8, 20</span><strong>40 pts</strong></div><div class="rubric-row"><span>Loop implementation</span><strong>10 pts</strong></div></div><p class="note">Full pass requires every test and a loop. The TA checks your explanation separately. Scores do not claim to measure complexity or readability.</p></div></div></div></section>
+<section id="boardSection"><div class="section-head"><div><h2>Class leaderboard</h2><p>First full pass wins its place; retries never erase an earlier success.</p></div><a href="?view=teacher" id="teacherLink" target="_blank" rel="noopener">Open teacher view ↗</a></div>
+<div class="teacher-controls" id="teacherControls" hidden><form id="teacherForm"><label class="field"><span>Teacher access key</span><input id="teacherKey" type="password" autocomplete="off" required></label><button class="ghost" type="submit">Unlock review</button><button class="ghost" type="button" id="lockTeacher" hidden>Lock review</button></form><p class="sub" id="teacherMessage">The board is public to the class. The access key unlocks code review and TA confirmation.</p></div>
+<div class="panel" id="leaderboard"><div class="panel-head"><div><div class="panel-title">Live leaderboard</div><div class="panel-note">Refreshes every 5 seconds · earliest full pass first</div></div><span class="sub" id="boardCount">0 submissions</span></div><div class="leaderboard" id="leaderboardList"><p class="empty">Waiting for the class service…</p></div></div>
+<section class="panel review" id="reviewPanel" hidden><h2 id="reviewName">Submission review</h2><div id="reviewContent"></div><button class="primary" id="verifyBtn">Confirm explanation</button><p class="sub" id="reviewMessage" role="status"></p></section>
+</section>
+<footer class="footer"><span>FiboLab · Python Loops</span><span>Work independently. Test, then explain.</span></footer>
+</div>
+</body></html>

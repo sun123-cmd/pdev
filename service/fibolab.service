@@ -1,0 +1,23 @@
+[Unit]
+Description=FiboLab classroom submission API
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=fibolab
+Group=fibolab
+SupplementaryGroups=docker
+WorkingDirectory=/opt/pdev
+EnvironmentFile=/etc/fibolab.env
+ExecStart=/usr/bin/python3 -m service.server --host 127.0.0.1 --port 8080
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/fibolab
+
+[Install]
+WantedBy=multi-user.target
