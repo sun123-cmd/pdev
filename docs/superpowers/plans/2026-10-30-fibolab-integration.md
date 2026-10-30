@@ -29,3 +29,12 @@
 Publication follows final verification: commit, push feature branch and open a PR against upstream; provide an export ZIP. Upstream direct push is unavailable to the authenticated account.
 
 Course label corrected to COMP 1023 in both slide entrypoints. Independent review found and reproduced a recursive alias bypass; reserved builtin names now cannot be rebound, with a regression test.
+
+## One-click demo follow-up
+
+- [x] Probe factlab-dev0-out: Python 3.9, working Bubblewrap/prlimit, cloudflared; Docker daemon unavailable.
+- [x] Add rootless isolated grading, SSH source transfer, per-user start/stop supervisor, four-hour expiry, temporary HTTPS and LAN links.
+- [x] Add Mac launchers, automatic teacher fragment login, same-origin dynamic student QR and concise Chinese show-day instructions.
+- [x] Reproduce and fix review findings: LAN selection must override existing tunnel links; shutdown drains active bounded judges before exiting.
+- [x] Validate all 22 tests on the real lab host, browser workflows over temporary HTTPS and local LAN, and actual expiry during infinite-loop grading.
+- [x] Stop rehearsal services and archive rehearsal data. November 3 launch remains manual, not scheduled.

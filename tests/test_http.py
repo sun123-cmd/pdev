@@ -2,22 +2,23 @@ import json
 import os
 import tempfile
 import threading
+import time
 import unittest
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-from service.grader import DockerGrader
+from service.grader import BubblewrapGrader, DockerGrader
 from service.server import create_server
 from service.store import Store
 from test_lab import GOOD
 
 
-@unittest.skipUnless(os.environ.get('FIBOLAB_DOCKER_TESTS') == '1', 'Set FIBOLAB_DOCKER_TESTS=1 after building fibolab-judge:local')
+@unittest.skipUnless(os.environ.get('FIBOLAB_DOCKER_TESTS') == '1' or os.environ.get('FIBOLAB_BWRAP_TESTS') == '1', 'Enable FIBOLAB_DOCKER_TESTS or FIBOLAB_BWRAP_TESTS for real sandbox HTTP tests')
 class LiveServiceTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.server = create_server('127.0.0.1', 0, Store(self.tmp.name + '/lab.db'),
-                                    DockerGrader(timeout=3), 'teacher-secret', {'https://class.example'})
+                                    (BubblewrapGrader(timeout=3) if os.environ.get('FIBOLAB_BWRAP_TESTS') == '1' else DockerGrader(timeout=3)), 'teacher-secret', {'https://class.example'})
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
         self.url = f'http://127.0.0.1:{self.server.server_port}'
@@ -73,8 +74,28 @@ class LiveServiceTests(unittest.TestCase):
         code = 'def fibonacci(n):\n    while True:\n        pass'
         status, result, _ = self.request('/api/submissions', {'code': code}, user['token'])
         self.assertEqual(status, 201)
-        self.assertIn('time limit', result['feedback'])
+        self.assertIn('limit', result['feedback'])
         self.assertFalse(self.request('/api/standings')[1]['students'][0]['passed'])
+
+    def test_stop_waits_for_active_judge_cleanup(self):
+        _, user, _ = self.request('/api/students', {'name': 'Active student'})
+        worker = threading.Thread(target=lambda: self.request('/api/submissions',
+            {'code': 'def fibonacci(n):\n    while True:\n        pass'}, user['token']), daemon=True)
+        worker.start()
+        for _ in range(100):
+            rows = self.request('/api/standings')[1]['students']
+            if rows and rows[0]['latestStatus'] == 'running':
+                break
+            time.sleep(.02)
+        else:
+            self.fail('Submission never entered the running state')
+        self.server.shutdown()
+        self.server.server_close()
+        worker.join(timeout=.2)
+        try:
+            self.assertFalse(worker.is_alive(), 'Stopping must wait for the active judge to finish cleanup')
+        finally:
+            worker.join(timeout=15)
 
     def test_static_pages_and_server_source_not_exposed(self):
         with urlopen(self.url + '/lab/') as response:

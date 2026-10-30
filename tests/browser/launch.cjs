@@ -1,0 +1,21 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const origin=process.env.FIBOLAB_TEST_URL;
+ const key=process.env.FIBOLAB_TEST_TEACHER_KEY;
+ if(!origin||!key)throw new Error('Set the demo URL and private test teacher key.');
+ const browser=await chromium.launch({headless:true,channel:'chrome'});
+ const teacher=await browser.newPage();
+ await teacher.goto(origin+'/lab/?view=teacher#key='+encodeURIComponent(key));
+ assert.equal(new URL(teacher.url()).hash,'');
+ assert.equal(await teacher.evaluate(()=>sessionStorage.getItem('pdev.fibolab.teacher')),key);
+ await teacher.getByRole('button',{name:'Review Alex <script>'}).first().click();
+ await teacher.locator('#reviewPanel pre').first().waitFor();
+ assert.equal(await teacher.locator('#teacherKey').inputValue(),'');
+ const response=await teacher.request.get(origin+'/api/session');
+ const session=await response.json();
+ assert.equal(session.studentUrl,origin+'/lab/');
+ assert.equal(JSON.stringify(session).includes(key),false);
+ await browser.close();
+ console.log('PASS: teacher launch link automatically unlocks review, removes URL fragment, and never exposes key in public session metadata');
+})().catch(error=>{const key=process.env.FIBOLAB_TEST_TEACHER_KEY||'not-set';console.error(String(error).split(key).join('[private key]'));process.exit(1)});

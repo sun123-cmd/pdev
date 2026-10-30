@@ -18,13 +18,17 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_BODY = 90_000
 
 
-def create_server(host, port, store, grader, admin_token, allowed_origins):
+def create_server(host, port, store, grader, admin_token, allowed_origins, session=None):
     slots = threading.BoundedSemaphore(2)
     active_students = set()
     active_lock = threading.Lock()
 
     class Handler(BaseHTTPRequestHandler):
         server_version = 'FiboLab/1.0'
+
+        def setup(self):
+            super().setup()
+            self.connection.settimeout(10)
 
         def log_message(self, fmt, *args):
             logging.info('%s %s', self.address_string(), fmt % args)
@@ -90,6 +94,8 @@ def create_server(host, port, store, grader, admin_token, allowed_origins):
                 except JudgeUnavailable as error:
                     return self.send_data(503, {'error': str(error)})
                 return self.send_data(200, {'ok': True})
+            if path == '/api/session' and session is not None:
+                return self.send_data(200, {key: session.get(key) for key in ('expiresAt', 'studentUrl', 'phase')})
             if path == '/api/standings':
                 return self.send_data(200, {'students': store.standings()})
             if path.startswith('/api/teacher/students/'):
@@ -176,7 +182,11 @@ def create_server(host, port, store, grader, admin_token, allowed_origins):
             self.end_headers()
             self.wfile.write(raw)
 
-    return ThreadingHTTPServer((host, port), Handler)
+    server = ThreadingHTTPServer((host, port), Handler)
+    # Wait for bounded in-flight graders so their container cleanup cannot be abandoned.
+    server.daemon_threads = False
+    server.block_on_close = True
+    return server
 
 
 def main():

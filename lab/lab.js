@@ -10,6 +10,12 @@ let user = null;
 try { user = JSON.parse(localStorage.getItem(USER_KEY) || 'null'); } catch { /* Fresh registration. */ }
 if (!user || typeof user.token !== 'string' || typeof user.name !== 'string') user = null;
 let teacherKey = sessionStorage.getItem('pdev.fibolab.teacher') || '';
+const launchKey = new URLSearchParams(location.hash.slice(1)).get('key');
+if (teacherView && !embedded && launchKey) {
+  teacherKey = launchKey;
+  sessionStorage.setItem('pdev.fibolab.teacher', teacherKey);
+  history.replaceState(null, '', location.pathname + location.search);
+}
 let students = [];
 let selectedStudent = null;
 let refreshing = false;
@@ -200,7 +206,10 @@ $('#verifyBtn').addEventListener('click', async () => {
     $('#reviewMessage').textContent = 'Explanation confirmed.'; await loadBoard();
   } catch (error) { $('#reviewMessage').textContent = error.message; $('#verifyBtn').disabled = false; }
 });
-if (teacherKey) $('#lockTeacher').hidden = false;
+if (teacherKey) {
+  $('#lockTeacher').hidden = false;
+  $('#teacherMessage').textContent = 'Review unlocked for this tab. Select a student to inspect their code.';
+}
 profile(); loadBoard();
 setInterval(loadBoard, 5000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) loadBoard(); });
